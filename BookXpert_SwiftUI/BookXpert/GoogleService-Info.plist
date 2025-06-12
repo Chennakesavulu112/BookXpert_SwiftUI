@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>103440590944-cvdsb8qpblp2lkpq8f5goq1lc1nmtnh7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.103440590944-cvdsb8qpblp2lkpq8f5goq1lc1nmtnh7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA0f_67XyBfE9uwjbCFFfdXSPU5mlgA93g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>103440590944</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kesav.BookXpert</string>
+	<key>PROJECT_ID</key>
+	<string>signinfirebase-ac0bf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>signinfirebase-ac0bf.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:103440590944:ios:a246d525bcddf2198c3b05</string>
+</dict>
+</plist>
