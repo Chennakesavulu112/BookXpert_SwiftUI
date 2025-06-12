@@ -14,6 +14,7 @@ import GoogleSignInSwift
 @main
 struct BookXpertApp: App {
     @StateObject private var authState = AuthState()
+    @StateObject private var themeManager = ThemeManager()
     let persistenceController = PersistenceController.shared
     
     init() {
@@ -32,6 +33,8 @@ struct BookXpertApp: App {
                 }
             }
             .environmentObject(authState)
+            .environmentObject(themeManager)
+            .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
         }
     }
 }

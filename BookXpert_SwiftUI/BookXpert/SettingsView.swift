@@ -3,9 +3,14 @@ import SwiftUI
 struct SettingsView: View {
     @StateObject private var notificationManager = NotificationManager.shared
     @EnvironmentObject private var authState: AuthState
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         Form {
+            Section(header: Text("Appearance")) {
+                Toggle("Dark Mode", isOn: $themeManager.isDarkMode)
+            }
+            
             Section(header: Text("Notifications")) {
                 Toggle("Enable Notifications", isOn: $notificationManager.notificationsEnabled)
                     .onChange(of: notificationManager.notificationsEnabled) { newValue in

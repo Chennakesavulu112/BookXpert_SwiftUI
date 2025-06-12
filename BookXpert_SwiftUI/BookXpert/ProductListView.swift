@@ -10,6 +10,7 @@ struct ProductListView: View {
     @State private var showingAddSheet = false
     @State private var deletedProductName: String?
     @State private var showDeleteBanner = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
@@ -73,10 +74,10 @@ struct ProductListView: View {
                             }
                             .padding(.vertical, 8)
                             .padding(.horizontal, 12)
-                            .background(Color.white.opacity(0.9))
+                            .background(colorScheme == .dark ? Color(.systemGray6) : Color.white)
                             .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .contentShape(Rectangle()) // Makes the entire row tappable
+                            .shadow(color: colorScheme == .dark ? .black.opacity(0.3) : .gray.opacity(0.2), radius: 2, x: 0, y: 1)
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 selectedProduct = product
                                 showingEditSheet = true
@@ -124,12 +125,10 @@ struct ProductListView: View {
                 if let product = selectedProduct {
                     deletedProductName = product.name
                     productManager.deleteProduct(product)
-                    // Only show banner if notifications are enabled
                     if notificationManager.notificationsEnabled {
                         withAnimation {
                             showDeleteBanner = true
                         }
-                        // Auto-hide banner after 3 seconds
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             withAnimation {
                                 showDeleteBanner = false
@@ -141,23 +140,24 @@ struct ProductListView: View {
         } message: {
             Text("Are you sure you want to delete this product?")
         }
-            .sheet(isPresented: $showingEditSheet, onDismiss: {
-                selectedProduct = nil
-            }) {
-                if let product = selectedProduct {
-                    ProductEditView(product: product)
-                } else {
-                    ProgressView("Loading...")
-                }
+        .sheet(isPresented: $showingEditSheet, onDismiss: {
+            selectedProduct = nil
+        }) {
+            if let product = selectedProduct {
+                ProductEditView(product: product)
+            } else {
+                ProgressView("Loading...")
             }
-            .sheet(isPresented: $showingAddSheet) {
-                ProductAddView()
-            }
+        }
+        .sheet(isPresented: $showingAddSheet) {
+            ProductAddView()
+        }
     }
 }
 
 struct ProductRow: View {
     @State var product: Product
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -183,15 +183,16 @@ struct ProductRow: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
-        .background(Color.white.opacity(0.9))
+        .background(colorScheme == .dark ? Color(.systemGray6) : Color.white)
         .cornerRadius(10)
-        .shadow(radius: 1)
+        .shadow(color: colorScheme == .dark ? .black.opacity(0.3) : .gray.opacity(0.2), radius: 2, x: 0, y: 1)
     }
 }
 
 struct ProductAddView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var productManager = ProductManager.shared
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var name: String = ""
     @State private var data: [String: String] = [:]
@@ -239,7 +240,7 @@ struct ProductAddView: View {
                     productManager.addProduct(name: name, data: convertedData)
                     dismiss()
                 }
-                    .disabled(name.isEmpty)
+                .disabled(name.isEmpty)
             )
         }
     }

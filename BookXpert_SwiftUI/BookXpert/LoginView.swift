@@ -14,11 +14,14 @@ struct LoginView: View {
             VStack(spacing: 20) {
                 Spacer()
                 
-                // App Logo or Title
+                // App Logo
+                AppLogoView(size: 120)
+                    .padding(.bottom, 20)
+                
                 Text("BookXpert")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 30)
                 
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
